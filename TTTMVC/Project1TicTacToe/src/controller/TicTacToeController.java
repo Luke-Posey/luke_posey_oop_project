@@ -10,4 +10,6 @@ public interface TicTacToeController {
 
     int getPlayerNum();
 
+    int getGameWinner();
+
 }
