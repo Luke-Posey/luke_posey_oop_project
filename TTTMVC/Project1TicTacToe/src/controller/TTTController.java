@@ -1,62 +1,42 @@
 package controller;
 
+
 import model.TTTModel;
 
 public class TTTController implements TicTacToeController {
-
+    // make a model
     private TTTModel model;
+    // make a controller with model passed through
     public TTTController(TTTModel model) {
         this.model = model;
     }
 
     @Override
     public char getPieceAt(int row, int col) {
+        // just run the model function for get piece at
         return model.getPieceAt(row, col);
     }
 
     @Override
     public void placePieceAt(int row, int col) {
+        // run the model function for place piece
         model.placePieceAt(row, col);
 
     }
 
     @Override
     public boolean isGameOver() {
-        String x = "xxx";
-        String o = "ooo";
-        String topRow = String.valueOf(this.getPieceAt(0,0) + this.getPieceAt(0,1) + this.getPieceAt(0,2));
-        String middleRow = String.valueOf(this.getPieceAt(1,0) + this.getPieceAt(1,1) + this.getPieceAt(1,2));
-        String bottomRow = String.valueOf(this.getPieceAt(2,0) + this.getPieceAt(2,1) + this.getPieceAt(2,2));
-        String leftCol = String.valueOf(this.getPieceAt(0,0) + this.getPieceAt(1,0) + this.getPieceAt(2,0));
-        String middleCol = String.valueOf(this.getPieceAt(0,1) + this.getPieceAt(1,1) + this.getPieceAt(2,1));
-        String rightCol = String.valueOf(this.getPieceAt(0,2) + this.getPieceAt(1,2) + this.getPieceAt(2,2));
-        String DiagOne = String.valueOf(this.getPieceAt(0,0) + this.getPieceAt(1,1) + this.getPieceAt(2,2));
-        String DiagTwo = String.valueOf(this.getPieceAt(0,2) + this.getPieceAt(1,1) + this.getPieceAt(2,0));
-        if (topRow.equals(x) | topRow.equals(o)){
-            return true;
-        }
-        if (middleRow.equals(x) | middleRow.equals(o)){
-            return true;
-        }
-        if (bottomRow.equals(x) | bottomRow.equals(o)){
-            return true;
-        }
-        if (leftCol.equals(x) | leftCol.equals(o)){
-            return true;
-        }
-        if (middleCol.equals(x) | middleCol.equals(o)){
-            return true;
-        }
-        if (rightCol.equals(x) | rightCol.equals(o)){
-            return true;
-        }
-        if (DiagOne.equals(x) | DiagTwo.equals(x)){
-            return true;
-        }
-        if (DiagOne.equals(o) | DiagTwo.equals(o)){
-            return true;
-        }
-        return false;
+        for (int i = 0; i < 3; i++) { // Row checker
+            if (model.getPieceAt(0, i) == model.getPieceAt(1, i) && model.getPieceAt(0, i) == model.getPieceAt(2, i) && model.getPieceAt(0, i) != '-') {
+                return true;
+            }
+            // Column checker
+            if (model.getPieceAt(i, 0) == model.getPieceAt(i, 1) && model.getPieceAt(i, 0) == model.getPieceAt(i, 2) && model.getPieceAt(i, 0) != '-') {
+                return true;
+            } }
+        boolean diag1 = model.getPieceAt(0, 0) == model.getPieceAt(1, 1) && model.getPieceAt(0, 0) == model.getPieceAt(2, 0) && model.getPieceAt(0, 0) != '-';
+        boolean diag2 = model.getPieceAt(0, 2) == model.getPieceAt(1, 1) && model.getPieceAt(0, 2) == model.getPieceAt(2, 0) && model.getPieceAt(0, 2) != '-';
+        return diag1 || diag2;
     }
 
     @Override
@@ -65,6 +45,10 @@ public class TTTController implements TicTacToeController {
     }
 
     public int getGameWinner() {
-            return getPlayerNum();
+        return getPlayerNum();
     }
 }
+
+
+
+

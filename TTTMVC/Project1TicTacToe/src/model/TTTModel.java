@@ -18,14 +18,15 @@ public class TTTModel extends AbstractTicTacToeModel {
 
     @Override
     public boolean placePieceAt(int row, int col) {
+        // if empty
         if (isEmpty(row, col)) {
-
+            // get the player number and if its 0 thats player x
             if (getPlayerNum(totalTurns) == 0){
                 board[row][col] = 'x';
                 totalTurns++;
                 return true;
             }
-
+            // if its player 1 its player o
             else if (getPlayerNum(totalTurns) == 1) {
                 board[row][col] = 'o';
                 totalTurns++;
@@ -33,14 +34,18 @@ public class TTTModel extends AbstractTicTacToeModel {
             }
 
             else{
+                // if there is already a piece there then it returns false
                 return false;
             }
         }
+        // if it didnt work it returns false
         return false;
     }
 
     @Override
     public int getPlayerNum(int totalTurns) {
+
+        // takes in total turns, mods 2 and gives you whos turn it is.
         return totalTurns % 2;
     }
 
